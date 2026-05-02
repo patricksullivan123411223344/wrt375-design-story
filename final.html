@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width initial-scale=1.0">
+  <title>LLM NPC Design Story</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <section class="headerSection">
+    <div class="headerTextBox">
+      <h1 class="headerText">Can LLM NPCs Feel Real?</h1>
+      <p>
+        A human-centered design case study exploring memory, emotion, and believable AI-driven character interaction.
+      </p>
+    </div>
+  </section>
+
+  <section class="introSection">
+    <h2>About the Student</h2>
+
+    <p>
+      Patrick Sullivan is a student and developer focused on building stateful AI systems that maintain memory, identity, and adaptive behavior across interactions.
+    </p>
+
+    <p>
+      This portfolio showcases a design case study for WRT 375: Human-Centered Design. The project explores how AI-driven NPCs can create more immersive, responsive, and human-like experiences in video games.
+    </p>
+  </section>
+
+  <section class="abstractSection">
+    <h2 class="projectAbstractHeader">Project Abstract</h2>
+
+    <p>
+      This project explores how AI-driven non-player characters can create more immersive and human-like interactions in video games. Traditional NPCs often feel static, predictable, and emotionally disconnected because they do not remember past interactions or adapt meaningfully to player behavior.
+    </p>
+
+    <p>
+      To investigate this problem, I built a prototype NPC conversation system that reacts to user tone, tracks emotional state changes, and attempts to recall previous moments in the interaction. Participants tested the prototype through structured scenarios including first contact, hostile interaction, reconciliation, and memory recall.
+    </p>
+
+    <p>
+      User testing showed that players are not simply looking for the most advanced AI model. They are looking for an NPC that feels believable. Across both technical and non-technical testers, the main immersion breaks were response latency, hallucinated or drifting responses, and dialogue that felt too long or overly dramatic.
+    </p>
+
+    <p>
+      These findings led to a design pivot: instead of using the LLM to generate every line of dialogue in real time, the stronger approach is to use AI as a control layer that selects from authored dialogue, scripted events, and memory-aware responses. This keeps the experience adaptive while improving pacing, reliability, and immersion.
+    </p>
+  </section>
+
+  <section class="problemSection">
+    <h2>Design Problem</h2>
+
+    <p>
+      In most video games, NPCs feel static and predictable. They often repeat the same dialogue, forget previous interactions, and fail to respond emotionally to the player’s behavior.
+    </p>
+
+    <p>
+      This project was guided by the question: how might we design an NPC that remembers past interactions and responds dynamically based on emotional context in order to create a more immersive and human-like experience?
+    </p>
+  </section>
+
+  <section class="userResearchSection">
+    <h2>User Research</h2>
+
+    <p>
+      User testing was conducted across two groups: casual or non-technical users and technically inclined users from Computer Science backgrounds. This structure allowed the project to gather both baseline usability feedback and deeper technical feedback about realism, system limitations, and interaction quality.
+    </p>
+
+    <p>
+      Participants interacted with the NPC through structured scenarios: first contact, hostile interaction, reconciliation, and memory recall. These scenarios were designed to test whether users noticed emotional changes, memory behavior, and adaptive responses.
+    </p>
+  </section>
+
+  <section class="processSection">
+    <h2>Design Process</h2>
+
+    <p>
+      The project began by identifying a common weakness in traditional NPC design: characters often fail to remember or meaningfully react to the player. From there, I developed a prototype focused on emotional responsiveness, memory tracking, and conversational adaptation.
+    </p>
+
+    <p>
+      Early iterations focused on building a working conversation loop where the NPC could respond to user tone and preserve context across turns. After testing, the design evolved based on feedback about latency, hallucinations, prompt drift, and unrealistic response length.
+    </p>
+
+    <p>
+      This process shifted the project from asking “Can an LLM generate dynamic NPC dialogue?” to a more useful design question: “How can AI support believable interaction without breaking pacing, trust, or immersion?”
+    </p>
+  </section>
+
+  <section class="systemOverviewSection">
+    <h2 class="systemOverviewHeader">System Overview</h2>
+
+    <p>
+      The prototype was designed as a stateful NPC system rather than a simple chatbot. Instead of treating each message as an isolated prompt, the system carries structured information forward across the interaction so the NPC can respond with a consistent personality, emotional state, and memory of prior events.
+    </p>
+
+    <p>
+      At the center of the system are structured context payloads that organize important information before it is sent into the model. These payloads help separate stable information, such as the NPC’s identity and personality, from changing information, such as the user’s tone, recent actions, emotional shifts, and conversation history.
+    </p>
+
+    <p>
+      The system also uses supporting instruction files to guide the NPC’s tone, response style, and role within the interaction. Short-term and longer-term memory patterns allow the NPC to behave more consistently across the conversation.
+    </p>
+
+    <p>
+      This architecture allowed the NPC to behave more consistently than a standard one-off LLM response. The goal was not just to generate dialogue, but to simulate a character that could remember, react, and change based on the user’s behavior.
+    </p>
+
+    <div class="systemFlowArrowChart">
+      <div>User Input</div>
+      <div>Tone + Intent Detection</div>
+      <div>Stateful NPC Memory</div>
+      <div>Prompt Payload Builder</div>
+      <div>LLM Response</div>
+      <div>Updated NPC State</div>
+    </div>
+  </section>
+
+  <section class="demoSection">
+    <h2>Try the Interaction</h2>
+
+    <p>
+      The following demo recreates the interaction patterns tested in the prototype. It does not use a live language model. Instead, it uses scripted branches to show the design direction that emerged from testing: AI NPCs feel more believable when the system controls pacing, memory, and response quality.
+    </p>
+
+    <p>
+      Choose a player approach below to see how the NPC responds.
+    </p>
+
+    <div class="demoButtons">
+      <button onclick="runScenario('neutral')">Neutral Approach</button>
+      <button onclick="runScenario('hostile')">Hostile Approach</button>
+      <button onclick="runScenario('memory')">Memory Check</button>
+    </div>
+
+    <div id="chatBox" class="chatBox"></div>
+    <div id="designNote" class="designNote"></div>
+  </section>
+
+  <section class="testingResultsSection">
+    <h2>What Users Found</h2>
+
+    <p>
+      Across both groups, the strongest finding was that users were not looking for the most advanced AI model. They were looking for an interaction that felt believable. The NPC needed to respond with a realistic cadence, maintain consistent character behavior, and avoid breaking immersion.
+    </p>
+
+    <div class="findingsGrid">
+      <div class="findingCard">
+        <h3>Latency Broke Immersion</h3>
+        <p>
+          When the NPC took too long to respond, users became more aware of the system behind the character. Even a delay of a few seconds made the interaction feel less natural.
+        </p>
+      </div>
+
+      <div class="findingCard">
+        <h3>Prompt Drift Broke Trust</h3>
+        <p>
+          Smaller local models sometimes drifted away from the intended personality or produced hallucinated responses, making the NPC feel inconsistent.
+        </p>
+      </div>
+
+      <div class="findingCard">
+        <h3>Long Responses Felt Unrealistic</h3>
+        <p>
+          Users responded better when the NPC had a clear conversational cadence. Overly long or dramatic responses made the character feel less like a real person and more like a chatbot.
+        </p>
+      </div>
+    </div>
+
+    <p>
+      These results showed that the main challenge was not simply making the NPC “smarter.” The real challenge was designing a system that could preserve pacing, consistency, and emotional believability during interaction.
+    </p>
+  </section>
+
+  <section class="designPivotSection">
+    <h2>The Design Pivot</h2>
+
+    <p>
+      The testing results showed that the original design gave the language model too much control over the moment-to-moment interaction. While live generation made the NPC feel flexible, it also introduced problems with latency, hallucination, prompt drift, and overly long responses.
+    </p>
+
+    <p>
+      Because of this, the next version of the system shifts from a generation-first model to a selection-first model. Instead of asking the LLM to write every line of dialogue in real time, the system would use authored dialogue, scripted events, and memory-aware response options.
+    </p>
+
+    <div class="pivotComparison">
+      <div class="pivotCard">
+        <h3>Original Approach</h3>
+        <p>
+          The LLM generates the NPC’s dialogue directly during the interaction.
+        </p>
+        <p>
+          This creates flexibility, but also increases response time and makes the character less reliable.
+        </p>
+      </div>
+
+      <div class="pivotCard">
+        <h3>Improved Approach</h3>
+        <p>
+          The LLM acts as a control layer that selects from prepared dialogue and scripted behavior.
+        </p>
+        <p>
+          This keeps the NPC adaptive while improving pacing, consistency, and immersion.
+        </p>
+      </div>
+    </div>
+
+    <p>
+      This pivot reframes the role of AI in NPC design. The goal is not to replace authored game writing, but to enhance it with memory, emotional state, and contextual decision-making.
+    </p>
+  </section>
+
+  <section class="reflectionSection">
+    <h2>Outcomes & Takeaways</h2>
+
+    <p>
+      This project demonstrated that increasing AI complexity does not automatically improve user experience. In real-time interaction systems, pacing, consistency, and believability matter more than raw model capability.
+    </p>
+
+    <p>
+      The most important takeaway is that AI should support interaction design, not replace it. By shifting from generation to selection, the system becomes more reliable while still maintaining adaptability.
+    </p>
+
+    <p>
+      In future iterations, I would explore more advanced memory systems, real-time optimization techniques, and a larger library of authored dialogue paths to further improve responsiveness and immersion.
+    </p>
+  </section>
+
+  <section class="contactSection">
+    <h2>Contact</h2>
+
+    <p>
+      Patrick Sullivan<br>
+      Email: patrick.sullivan@uri.edu<br>
+      <a href="https://github.com/patricksullivan123411223344/llm_npc_wrt375.git">
+        View Project Repository
+      </a>
+    </p>
+  </section>
+
+  <script src="./scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,690 @@
+/* --------------------------------------------------------------------------
+   LLM NPC Design Story — case study portfolio
+   Dark theme, CSS variables, readable max-width layout
+--------------------------------------------------------------------------- */
+
+:root {
+  --bg-base: #0c0f13;
+  --bg-elevated: #13181f;
+  --bg-card: #181e27;
+  --bg-card-hover: #1c232e;
+  --bg-chat: #0f1218;
+
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-strong: rgba(255, 255, 255, 0.1);
+
+  --text-primary: #e9edf2;
+  --text-secondary: #a8b4c0;
+  --text-muted: #7d8a96;
+
+  --accent: #6bc4cf;
+  --accent-soft: rgba(107, 196, 207, 0.14);
+  --accent-muted: rgba(107, 196, 207, 0.45);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.25);
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 999px;
+
+  --space-xs: 0.35rem;
+  --space-sm: 0.65rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.25rem;
+  --space-2xl: 3rem;
+  --space-section: clamp(2rem, 4.5vw, 3.25rem);
+  --space-section-tight: clamp(1.2rem, 2.6vw, 1.75rem);
+
+  --content-max: 720px;
+  --content-wide: 960px;
+
+  --font-sans: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont,
+    "Helvetica Neue", sans-serif;
+
+  --transition-fast: 0.15s ease;
+  --transition-smooth: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.68;
+  color: var(--text-primary);
+  background: var(--bg-base);
+  background-image: radial-gradient(
+      ellipse 100% 70% at 50% -25%,
+      rgba(107, 196, 207, 0.07),
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 90% 55% at 50% 0%,
+      rgba(107, 196, 207, 0.035),
+      transparent 50%
+    );
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Typography --- */
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: clamp(2.15rem, 5vw, 3.35rem);
+  font-weight: 700;
+  margin: 0 0 var(--space-sm);
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: clamp(1.45rem, 2.8vw, 1.95rem);
+  margin: 0 0 var(--space-md);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+h3 {
+  font-size: 1.1rem;
+  margin: 0 0 var(--space-sm);
+  color: var(--text-primary);
+}
+
+p {
+  margin: 0 0 var(--space-sm);
+  color: var(--text-secondary);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  transition: color var(--transition-fast), opacity var(--transition-fast);
+}
+
+a:hover {
+  color: #8ad4dd;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* --- Section shell: max-width + padding --- */
+
+section {
+  padding: var(--space-section)
+    clamp(var(--space-md), 4vw, var(--space-xl));
+}
+
+section > h2:first-child,
+section > .projectAbstractHeader:first-child,
+section > .systemOverviewHeader:first-child {
+  max-width: var(--content-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+section > p,
+section > .findingsGrid,
+section > .pivotComparison,
+section > .systemFlowArrowChart,
+section > .demoButtons,
+section > #chatBox,
+section > #designNote {
+  max-width: var(--content-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --- Subtle entrance (no JS) --- */
+
+@media (prefers-reduced-motion: no-preference) {
+  section {
+    animation: section-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  }
+
+  section:nth-child(1) {
+    animation-delay: 0.02s;
+  }
+  section:nth-child(2) {
+    animation-delay: 0.06s;
+  }
+  section:nth-child(3) {
+    animation-delay: 0.1s;
+  }
+  section:nth-child(4) {
+    animation-delay: 0.14s;
+  }
+  section:nth-child(5) {
+    animation-delay: 0.18s;
+  }
+  section:nth-child(6) {
+    animation-delay: 0.22s;
+  }
+  section:nth-child(7) {
+    animation-delay: 0.26s;
+  }
+  section:nth-child(8) {
+    animation-delay: 0.3s;
+  }
+  section:nth-child(9) {
+    animation-delay: 0.34s;
+  }
+  section:nth-child(10) {
+    animation-delay: 0.38s;
+  }
+  section:nth-child(11) {
+    animation-delay: 0.42s;
+  }
+  section:nth-child(12) {
+    animation-delay: 0.46s;
+  }
+}
+
+@keyframes section-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- headerSection --- */
+
+.headerSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.headerSection .headerTextBox h1 {
+  margin-bottom: var(--space-xs);
+}
+
+.headerTextBox {
+  max-width: min(var(--content-max), 100%);
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.headerTextBox p {
+  font-size: clamp(1.02rem, 1.85vw, 1.12rem);
+  color: var(--text-secondary);
+  max-width: 42ch;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.55;
+}
+
+.headerText {
+  background: linear-gradient(135deg, var(--text-primary) 0%, #b8c5d4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* --- intro, abstract, problem, research, process --- */
+
+.introSection,
+.abstractSection,
+.problemSection,
+.userResearchSection,
+.processSection {
+  background: transparent;
+}
+
+.abstractSection {
+  background: rgba(255, 255, 255, 0.02);
+  border-block: 1px solid var(--border-subtle);
+}
+
+/* Design Problem → System Overview: tighter vertical rhythm */
+
+.problemSection,
+.userResearchSection,
+.processSection,
+.systemOverviewSection {
+  padding-top: var(--space-section-tight);
+  padding-bottom: var(--space-section-tight);
+}
+
+.problemSection h2,
+.userResearchSection h2,
+.processSection h2,
+.systemOverviewSection > h2:first-child,
+.systemOverviewSection > .systemOverviewHeader:first-child {
+  margin-bottom: var(--space-sm);
+  padding-bottom: 0.2rem;
+}
+
+.problemSection p,
+.userResearchSection p,
+.processSection p,
+.systemOverviewSection > p {
+  margin-bottom: var(--space-xs);
+}
+
+/* --- systemOverviewSection / flow chart --- */
+
+.systemFlowArrowChart {
+  max-width: var(--content-wide) !important;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-md) !important;
+  padding: var(--space-md);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.systemFlowArrowChart > div {
+  position: relative;
+  padding: var(--space-md) var(--space-sm);
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition: background var(--transition-smooth), border-color var(--transition-smooth),
+    transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.systemFlowArrowChart > div:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 900px) {
+  .systemFlowArrowChart > div:not(:last-child)::after {
+    content: "→";
+    position: absolute;
+    right: calc(-1 * var(--space-md) - 0.35rem);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent-muted);
+    font-size: 1rem;
+    pointer-events: none;
+  }
+
+  .systemFlowArrowChart {
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--space-md);
+    padding-inline: var(--space-lg);
+  }
+}
+
+@media (max-width: 899px) {
+  .systemFlowArrowChart > div:not(:last-child)::after {
+    content: "↓";
+    display: block;
+    margin-top: var(--space-sm);
+    color: var(--accent-muted);
+    font-size: 1rem;
+  }
+}
+
+/* --- demoSection — interactive focal area --- */
+
+.demoSection {
+  max-width: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(107, 196, 207, 0.06) 0%,
+    transparent 45%
+  );
+  border-block: 1px solid var(--border-subtle);
+  position: relative;
+}
+
+.demoSection::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 70% 50% at 50% 0%,
+    rgba(107, 196, 207, 0.07),
+    transparent 65%
+  );
+}
+
+.demoSection > * {
+  position: relative;
+  z-index: 1;
+}
+
+.demoSection > h2:first-child {
+  max-width: var(--content-max);
+}
+
+.demoSection > p {
+  max-width: var(--content-max);
+}
+
+.demoButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md) !important;
+}
+
+.demoButtons button {
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-full);
+  padding: 0.65rem 1.35rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: background var(--transition-smooth), border-color var(--transition-smooth),
+    transform var(--transition-smooth), box-shadow var(--transition-smooth),
+    color var(--transition-fast);
+}
+
+.demoButtons button:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent-muted);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.demoButtons button:active {
+  transform: translateY(0);
+}
+
+.demoButtons button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* --- #chatBox / .chatBox — messaging UI --- */
+
+#chatBox.chatBox {
+  min-height: 120px;
+  padding: var(--space-md);
+  background: var(--bg-chat);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  transition: border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+#chatBox.chatBox:hover {
+  border-color: var(--border-strong);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), var(--shadow-md);
+}
+
+#chatBox.chatBox p {
+  margin: 0;
+  max-width: min(88%, 400px);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+  border: 1px solid transparent;
+  transition: transform var(--transition-fast);
+}
+
+#chatBox.chatBox p strong {
+  font-weight: 600;
+  color: var(--accent);
+  margin-right: 0.35rem;
+}
+
+/* Player messages — right */
+#chatBox.chatBox p:nth-child(1):not(:only-child) {
+  align-self: flex-end;
+  background: var(--accent-soft);
+  border-color: rgba(107, 196, 207, 0.25);
+  border-bottom-right-radius: var(--radius-sm);
+}
+
+#chatBox.chatBox p:nth-child(1):not(:only-child) strong {
+  color: #8ad4dd;
+}
+
+/* NPC messages — left */
+#chatBox.chatBox p:nth-child(2) {
+  align-self: flex-start;
+  background: var(--bg-card);
+  border-color: var(--border-subtle);
+  border-bottom-left-radius: var(--radius-sm);
+}
+
+/* Loading / single-line thinking state */
+#chatBox.chatBox p:only-child {
+  align-self: center;
+  max-width: 100%;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--border-subtle);
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+#chatBox.chatBox p:only-child strong {
+  color: var(--text-secondary);
+  font-style: normal;
+}
+
+/* --- #designNote — distinct caption below chat --- */
+
+#designNote.designNote {
+  margin-top: var(--space-sm) !important;
+  padding: var(--space-sm) var(--space-md);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 248, 220, 0.06) 0%,
+    rgba(107, 196, 207, 0.06) 100%
+  );
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  border: 1px solid var(--border-subtle);
+  border-left-width: 4px;
+  border-left-color: var(--accent);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+#designNote.designNote strong:first-child {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+#designNote.designNote:empty {
+  display: none;
+}
+
+/* --- testingResultsSection / findings --- */
+
+.testingResultsSection .findingsGrid {
+  max-width: var(--content-wide) !important;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: var(--space-md);
+  margin: var(--space-lg) auto !important;
+}
+
+.findingCard {
+  padding: var(--space-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-smooth), border-color var(--transition-smooth),
+    box-shadow var(--transition-smooth), background var(--transition-smooth);
+}
+
+.findingCard:hover {
+  transform: translateY(-3px);
+  background: var(--bg-card-hover);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+}
+
+.findingCard h3 {
+  font-size: 1.05rem;
+  color: var(--text-primary);
+}
+
+.findingCard p {
+  font-size: 0.98rem;
+  margin-bottom: 0;
+}
+
+/* --- designPivotSection / pivot cards --- */
+
+.designPivotSection {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.pivotComparison {
+  max-width: var(--content-wide) !important;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: var(--space-md);
+  margin: var(--space-lg) auto !important;
+}
+
+.pivotCard {
+  padding: var(--space-md);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-smooth), border-color var(--transition-smooth),
+    box-shadow var(--transition-smooth);
+}
+
+.pivotCard:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-muted);
+  box-shadow: var(--shadow-md);
+}
+
+.pivotCard:first-child {
+  border-top: 3px solid rgba(244, 180, 100, 0.35);
+}
+
+.pivotCard:last-child {
+  border-top: 3px solid rgba(107, 196, 207, 0.45);
+}
+
+.pivotCard h3 {
+  font-size: 1.1rem;
+}
+
+.pivotCard p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- reflection + contact --- */
+
+.reflectionSection {
+  border-block: 1px solid var(--border-subtle);
+}
+
+.contactSection {
+  padding-bottom: var(--space-xl);
+  text-align: left;
+}
+
+.contactSection h2 {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.contactSection p {
+  padding: var(--space-md);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  max-width: var(--content-max);
+  margin-left: auto !important;
+  margin-right: auto !important;
+  line-height: 1.85;
+}
+
+/* --- Responsive tweaks --- */
+
+@media (max-width: 640px) {
+  section {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .headerSection {
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-lg);
+  }
+
+  .demoButtons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .demoButtons button {
+    width: 100%;
+    text-align: center;
+  }
+
+  #chatBox.chatBox p {
+    max-width: 94%;
+  }
+}
