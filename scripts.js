@@ -10,7 +10,7 @@ function runScenario(type) {
             <p><strong>You:</strong> Hey, what's going on here?</p>
             <p><strong>NPC:</strong> Not much... depends who's asking. You seem alright though.</p>
         `;
-        designNote = "The NPC responds with a neutral tone, adapting to the user's neutral approach while maintaining a consistent personality.";
+        designNote = "The NPC responds with a softer tone, adapting to the user's neutral approach while maintaining a consistent personality.";
     }
 
     if (type === "hostile") {
